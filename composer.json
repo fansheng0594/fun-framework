@@ -1,0 +1,11 @@
+{
+    "name": "fun/framework",
+    "description": "composer require fun/framework",
+    "authors": [
+        {
+            "name": "fansheng",
+            "email": "fansheng0594@163.com"
+        }
+    ],
+    "require": {}
+}
