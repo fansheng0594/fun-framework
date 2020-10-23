@@ -1,0 +1,16 @@
+{
+    "name": "fun/fantastic-contracts",
+    "description": "composer require fun/fantastic-contracts",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Fansheng",
+            "email": "fansheng0594@163.com"
+        }
+    ],
+    "require": {
+        "php": "^7.3",
+        "illuminate/contracts": "^8.0",
+        "psr/container": "^1.0"
+    }
+}
