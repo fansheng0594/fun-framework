@@ -19,6 +19,8 @@ function remote()
 
 git pull origin $CURRENT_BRANCH
 
-remote auth git@github.com:illuminate/auth.git
+remote auth git@github.com:fansheng0594/framework-auth.git
+remote contracts git@github.com:fansheng0594/framework-contracts.git
 
-split 'src/Illuminate/Auth' auth
+split 'src/Fantastic/Auth' auth
+split 'src/Fantastic/Contracts' contracts
