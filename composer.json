@@ -1,11 +1,32 @@
 {
-    "name": "fun/framework",
-    "description": "composer require fun/framework",
+    "name": "fansheng0594/fun",
+    "description": "fansheng0594/fun",
+    "license": "MIT",
     "authors": [
         {
-            "name": "fansheng",
+            "name": "Fansheng",
             "email": "fansheng0594@163.com"
         }
     ],
-    "require": {}
+    "require": {
+        "php": "^7.3"
+    },
+    "replace": {
+        "fansheng0594/fantastic-contracts": "self.version"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fantastic\\": "src/Fantastic/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "0.x-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
