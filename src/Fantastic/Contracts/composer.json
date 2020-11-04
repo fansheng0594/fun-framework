@@ -1,6 +1,6 @@
 {
     "name": "fun/fantastic-contracts",
-    "description": "composer require fun/fantastic-contracts",
+    "description": "fun/fantastic-contracts",
     "license": "MIT",
     "authors": [
         {
@@ -10,7 +10,6 @@
     ],
     "require": {
         "php": "^7.3",
-        "illuminate/contracts": "^8.0",
         "psr/container": "^1.0"
     }
 }
