@@ -21,6 +21,8 @@ git pull origin $CURRENT_BRANCH
 
 remote auth git@github.com:fansheng0594/framework-auth.git
 remote contracts git@github.com:fansheng0594/framework-contracts.git
+remote container git@github.com:fansheng0594/framework-container.git
 
 split 'src/Fantastic/Auth' auth
 split 'src/Fantastic/Contracts' contracts
+split 'src/Fantastic/container' container
