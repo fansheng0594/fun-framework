@@ -1,0 +1,14 @@
+{
+    "name": "fun/fantastic-support",
+    "description": "support",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Fansheng",
+            "email": "fansheng0594@163.com"
+        }
+    ],
+    "require": {
+        "php": "^7.3"
+    }
+}
