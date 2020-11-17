@@ -52,7 +52,7 @@ class Application extends Container
 
     public function basePath($path = '')
     {
-        return $this->basePath().($path ? DIRECTORY_SEPARATOR.$path : $path);
+        return $this->basePath.($path ? DIRECTORY_SEPARATOR.$path : $path);
     }
 
     public function langPath($path = '')
@@ -100,5 +100,11 @@ class Application extends Container
 
         $this->instance(Container::class, $this);
         $this->singleton(Mix::class);
+
+        $this->singleton(PackageManifest::class, function (){
+            return new PackageManifest(
+
+            );
+        });
     }
 }
