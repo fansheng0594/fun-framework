@@ -1,0 +1,14 @@
+{
+    "name": "fun/fantastic-filesystem",
+    "description": "filesystem",
+    "authors": [
+        {
+            "name": "Fansheng",
+            "email": "fansheng0594@163.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.3"
+    }
+}
