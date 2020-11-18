@@ -1,0 +1,13 @@
+{
+    "name": "fun/fantastic-event",
+    "description": "fantastic-event",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Fansheng",
+            "email": "fansheng0594@163.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
