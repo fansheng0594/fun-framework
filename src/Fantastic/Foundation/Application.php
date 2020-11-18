@@ -4,7 +4,7 @@ namespace Fantastic\Foundation;
 
 use Fantastic\Container\Container;
 use Fantastic\Contracts\Foundation\Application as ApplicationContract;
-use Fantastic\Event\EventServiceProvider;
+use Fantastic\Events\EventServiceProvider;
 use Fantastic\Filesystem\Filesystem;
 use Fantastic\Foundation\Mix;
 use Fantastic\Support\Arr;
@@ -17,6 +17,8 @@ class Application extends Container implements ApplicationContract
     protected $storagePath;
     protected $databasePath;
     protected $serviceProviders = [];
+    protected $loadProviders = [];
+    protected $booted = false;
 
     public function __construct($basePath = null)
     {
@@ -127,6 +129,7 @@ class Application extends Container implements ApplicationContract
     protected function registerBaseServiceProviders()
     {
         $this->register(new EventServiceProvider($this));
+        $this->register(new EventServiceProvider($this));
     }
 
     public function version()
@@ -177,6 +180,26 @@ class Application extends Container implements ApplicationContract
         }
 
         $provider->register();
+
+        if (property_exists($provider, 'bindings')) {
+            foreach ($provider->bindings as $key => $value) {
+                $this->bind($key, $value);
+            }
+        }
+
+        if (property_exists($provider, 'singletons')) {
+            foreach ($provider->singletons as $key => $value) {
+                $this->singleton($key, $value);
+            }
+        }
+
+        $this->markAsRegistered($provider);
+
+        if ($this->isBooted()) {
+            $this->bootProvider($provider);
+        }
+
+        return $provider;
     }
 
     public function registerDeferredProvider($provider, $service = null)
@@ -266,5 +289,42 @@ class Application extends Container implements ApplicationContract
     protected function getProvider($provider)
     {
         return array_values($this->getProviders($provider))[0] ?? null;
+    }
+
+    /**
+     * @param ServiceProvider $provider
+     * @return void
+     */
+    protected function markAsRegistered(ServiceProvider $provider)
+    {
+        $this->serviceProviders[] = $provider;
+
+        $this->loadProviders[get_class($provider)] = true;
+    }
+
+    /**
+     * 确定应用程序是否已经启动
+     *
+     * @retuen bool
+     */
+    public function isBooted()
+    {
+        return $this->booted;
+    }
+
+    /**
+     * 初始化给定的服务容器提供者
+     *
+     * @param ServiceProvider $provider
+     * @return void
+     */
+    protected function bootProvider(ServiceProvider $provider)
+    {
+        $provider->callBootingCallbacks();
+        if (method_exists($provider, 'boot')) {
+            $this->call([$provider, 'boot']);
+        }
+
+        $provider->callBootedCallbacks();
     }
 }

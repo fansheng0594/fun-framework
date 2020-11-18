@@ -25,6 +25,7 @@ remote container git@github.com:fansheng0594/framework-container.git
 remote support git@github.com:fansheng0594/framework-support.git
 remote filesystem git@github.com:fansheng0594/framework-filesystem.git
 remote events git@github.com:fansheng0594/framework-events.git
+remote log git@github.com:fansheng0594/framework-log.git
 
 split 'src/Fantastic/Auth' auth
 split 'src/Fantastic/Contracts' contracts
@@ -32,3 +33,4 @@ split 'src/Fantastic/Container' container
 split 'src/Fantastic/Support' support
 split 'src/Fantastic/Filesystem' filesystem
 split 'src/Fantastic/Events' events
+split 'src/Fantastic/Log' log
