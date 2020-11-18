@@ -7,6 +7,7 @@ use Fantastic\Contracts\Foundation\Application as ApplicationContract;
 use Fantastic\Events\EventServiceProvider;
 use Fantastic\Filesystem\Filesystem;
 use Fantastic\Foundation\Mix;
+use Fantastic\Log\LogServiceProvider;
 use Fantastic\Support\Arr;
 use Fantastic\Support\ServiceProvider;
 
@@ -129,7 +130,8 @@ class Application extends Container implements ApplicationContract
     protected function registerBaseServiceProviders()
     {
         $this->register(new EventServiceProvider($this));
-        $this->register(new EventServiceProvider($this));
+        $this->register(new LogServiceProvider($this));
+        $this->register(new LogServiceProvider($this));
     }
 
     public function version()
