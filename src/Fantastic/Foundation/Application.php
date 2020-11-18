@@ -3,6 +3,7 @@
 namespace Fantastic\Foundation;
 
 use Fantastic\Container\Container;
+use Fantastic\Filesystem\Filesystem;
 use Fantastic\Foundation\Mix;
 
 class Application extends Container
@@ -19,6 +20,7 @@ class Application extends Container
         }
 
         $this->registerBaseBindings();
+        $this->registerBaseServiceProviders();
     }
 
     public function setBasePath($basePath)
@@ -103,8 +105,22 @@ class Application extends Container
 
         $this->singleton(PackageManifest::class, function (){
             return new PackageManifest(
-
+                new Filesystem, $this->basePath(), $this->getCachedPackagesPath()
             );
         });
+    }
+
+    protected function getCachedPackagesPath()
+    {
+        var_dump('method getCachedPackagesPath todo');
+        die;
+    }
+
+    /**
+     * 注册所有的基础服务提供者
+     */
+    protected function registerBaseServiceProviders()
+    {
+        $this->register(new EventServiceProvider($this));
     }
 }
