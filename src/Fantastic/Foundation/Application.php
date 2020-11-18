@@ -3,15 +3,20 @@
 namespace Fantastic\Foundation;
 
 use Fantastic\Container\Container;
+use Fantastic\Contracts\Foundation\Application as ApplicationContract;
+use Fantastic\Event\EventServiceProvider;
 use Fantastic\Filesystem\Filesystem;
 use Fantastic\Foundation\Mix;
+use Fantastic\Support\Arr;
+use Fantastic\Support\ServiceProvider;
 
-class Application extends Container
+class Application extends Container implements ApplicationContract
 {
     protected $basePath;
     protected $appPath;
     protected $storagePath;
     protected $databasePath;
+    protected $serviceProviders = [];
 
     public function __construct($basePath = null)
     {
@@ -122,5 +127,144 @@ class Application extends Container
     protected function registerBaseServiceProviders()
     {
         $this->register(new EventServiceProvider($this));
+    }
+
+    public function version()
+    {
+        // TODO: Implement version() method.
+    }
+
+    public function environment(...$environments)
+    {
+        // TODO: Implement environment() method.
+    }
+
+    public function runningInConsole()
+    {
+        // TODO: Implement runningInConsole() method.
+    }
+
+    public function runningUnitTests()
+    {
+        // TODO: Implement runningUnitTests() method.
+    }
+
+    public function isDownForMaintenance()
+    {
+        // TODO: Implement isDownForMaintenance() method.
+    }
+
+    public function registerConfiguredProviders()
+    {
+        // TODO: Implement registerConfiguredProviders() method.
+    }
+
+    /**
+     * 在应用程序中注册服务提供者
+     *
+     * @param ServiceProvider|string $provider
+     * @param bool $force
+     * @return ServiceProvider|void
+     */
+    public function register($provider, $force = false)
+    {
+        if (($registered = $this->getProvider($provider)) && !$force) {
+            return $registered;
+        }
+
+        if (is_string($provider)) {
+            $provider = $this->resolveProvider($provider);
+        }
+
+        $provider->register();
+    }
+
+    public function registerDeferredProvider($provider, $service = null)
+    {
+        // TODO: Implement registerDeferredProvider() method.
+    }
+
+    /**
+     * 根据类名解析一个服务提供者
+     *
+     * @param string $provider
+     * @return ServiceProvider
+     */
+    public function resolveProvider($provider)
+    {
+        return new $provider($this);
+    }
+
+    public function boot()
+    {
+        // TODO: Implement boot() method.
+    }
+
+    public function booting($callback)
+    {
+        // TODO: Implement booting() method.
+    }
+
+    public function booted($callback)
+    {
+        // TODO: Implement booted() method.
+    }
+
+    public function bootstrapWith(array $bootstrappers)
+    {
+        // TODO: Implement bootstrapWith() method.
+    }
+
+    public function getLocale()
+    {
+        // TODO: Implement getLocale() method.
+    }
+
+    public function getNamespace()
+    {
+        // TODO: Implement getNamespace() method.
+    }
+
+    public function getProviders($provider)
+    {
+        $name = is_string($provider) ? $provider : get_class($provider);
+
+        return Arr::where($this->serviceProviders, function ($value) use ($name) {
+            return $value instanceof $name;
+        });
+    }
+
+    public function hasBeenBootstrapped()
+    {
+        // TODO: Implement hasBeenBootstrapped() method.
+    }
+
+    public function loadDeferredProviders()
+    {
+        // TODO: Implement loadDeferredProviders() method.
+    }
+
+    public function setLocale($locale)
+    {
+        // TODO: Implement setLocale() method.
+    }
+
+    public function shouldSkipMiddleware()
+    {
+        // TODO: Implement shouldSkipMiddleware() method.
+    }
+
+    public function terminate()
+    {
+        // TODO: Implement terminate() method.
+    }
+
+    /**
+     * @param ServiceProvider|string $provider
+     * @return mixed|null
+     */
+    protected function getProvider($provider)
+    {
+        return array_values($this->getProviders($provider))[0] ?? null;
     }
 }
